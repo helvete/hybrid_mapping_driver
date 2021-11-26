@@ -1,0 +1,21 @@
+parameters:
+  doctrine:
+    database:
+      host: postgres
+      dbname: db_portal
+      driver: pdo_pgsql
+      user: postgres
+      password: postgres
+      port: 5432
+    paths:
+      - %appDir%/entity
+    proxy_dir: %tempDir%/proxies
+
+services:
+  doctrineAnnoReader: Doctrine\Common\Annotations\AnnotationReader
+  doctrineAnnoDriver: Doctrine\ORM\Mapping\Driver\AnnotationDriver(@doctrineAnnoReader, %doctrine.paths%)
+  doctrineAttrDriver: Doctrine\ORM\Mapping\Driver\AttributeDriver(%doctrine.paths%)
+  hybridMappingDriver: Utils\Doctrine\HybridMappingDriver(...,...,...,%devMode%)
+  entityManager:
+    class: Doctrine\ORM\EntityManager
+    factory: Utils\Doctrine\EntityManagerFactory::create(%doctrine%, @hybridMappingDriver, %devMode%)
