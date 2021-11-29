@@ -1,0 +1,20 @@
+{
+    "autoload": {
+        "classmap": [
+            "src/"
+        ]
+    },
+    "config": {
+        "optimize-autoloader": true
+    },
+    "description": "HybridMappingDriver allows to use both Annotation and Attributes drivers to parse doctrine entity metadata",
+    "license": [
+        "GNU General Public License v3.0"
+    ],
+    "name": "helvete/hybrid-mapping-driver",
+    "require": {
+        "doctrine/orm": "^2.9.3",
+        "php": "^8.0.0"
+    },
+    "type": "project"
+}
