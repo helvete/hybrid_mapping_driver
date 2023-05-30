@@ -38,8 +38,11 @@ class HybridMappingDriver extends AbstractAnnotationDriver
 
     public function isTransient($className): bool
     {
-        return $this->attributeDriver->isTransient($className)
-            || $this->annotationDriver->isTransient($className);
+        if (!$this->annotationDriver->isTransient($className) 
+         || !$this->attributeDriver->isTransient($className)) {
+            return false;
+        }
+        return true;
     }
 
     private function logEvent(string $message): void
